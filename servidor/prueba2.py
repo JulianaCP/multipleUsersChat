@@ -3,7 +3,7 @@ import sys
 
 def menu():
     print("*************        MENU PRINCIPAL      *******************")
-    HOST, PORT = "172.24.44.219", 8090
+    HOST, PORT = "172.24.43.158", 8090
     data = input("1. Consultar el nombre del host del Servidor\n"
                 "2. Consultar la IP del Servidor\n"
                 "3. Consultar la cantidad de procesos ejecutandose en el servidor\n"

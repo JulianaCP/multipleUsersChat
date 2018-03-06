@@ -1,7 +1,7 @@
 import socketserver, threading, time
 import socket
 
-HOST, PORT = "172.24.44.219", 8090
+HOST, PORT = "172.24.43.158", 8090
 host_name = "Host name: %s" % socket.gethostname()
 ipAddress= "IP address: %s" % socket.getaddrinfo(HOST,PORT)
 
