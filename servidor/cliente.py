@@ -2,9 +2,8 @@ import socket
 import sys
 import webbrowser
 
-
 def menu():
-    HOST, PORT = "172.24.43.158", 8090
+    HOST, PORT = "172.24.73.178", 9090
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     while(True):
         print("*************        MENU PRINCIPAL      *******************")
@@ -28,7 +27,7 @@ def menu():
 
             codigo = input("Escribir Codigo: ")
 
-
+        data = data + ",CR"
         sock.sendto(data.encode(), (HOST, PORT))
         received = sock.recv(1024)
         print("************************************************************")

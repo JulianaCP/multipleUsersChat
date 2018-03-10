@@ -1,7 +1,7 @@
 import socketserver, threading, time
 import socket
 
-HOST, PORT = "172.24.43.158", 8090
+HOST, PORT = "172.24.73.178", 9090
 host_name = "Host name: %s" % socket.gethostname()
 ipAddress= "IP address: %s" % socket.getaddrinfo(HOST,PORT)
 numeroDeDatos = 0
@@ -13,6 +13,13 @@ class ThreadedUDPRequestHandler(socketserver.BaseRequestHandler):
         data = self.request[0].strip()
         opcion= data[0]
         socket = self.request[1]
+        print("22222------222222")
+        print(data)
+        x,y = data.decode().split(",")
+        print(x)
+        print(y)
+        print("------------------")
+        print(opcion)
         current_thread = threading.current_thread()
         print("{}: client: {}, wrote: {}".format(current_thread.name, self.client_address, data))
 
