@@ -1,5 +1,7 @@
 import socket
 import sys
+import webbrowser
+
 
 def menu():
     HOST, PORT = "172.24.43.158", 8090
@@ -16,6 +18,16 @@ def menu():
 
         if (data == "6"):
             break
+
+        if (data == '4'):
+            opcion = input("1. Revisar Codigos paises\n"
+                           "2. Escribir Codigo\n"
+                           "Opción: ")
+            if (opcion == '1'):
+                webbrowser.open('https://timezonedb.com/country-codes')
+
+            data = input("Escribir Codigo: ")
+
 
         sock.sendto(data.encode(), (HOST, PORT))
         received = sock.recv(1024)
