@@ -4,47 +4,32 @@ import socket
 HOST, PORT = "172.24.43.158", 8090
 host_name = "Host name: %s" % socket.gethostname()
 ipAddress= "IP address: %s" % socket.getaddrinfo(HOST,PORT)
-numeroDeClientes = 0
+numeroDeDatos = 0
+
 
 class ThreadedUDPRequestHandler(socketserver.BaseRequestHandler):
     def handle(self):
-        global numeroDeClientes
-
+        global numeroDeDatos
         data = self.request[0].strip()
         opcion= data[0]
         socket = self.request[1]
         current_thread = threading.current_thread()
+        print("{}: client: {}, wrote: {}".format(current_thread.name, self.client_address, data))
 
-        if (opcion == 48): # 0 inicializar
-            numeroDeClientes += 1
-            print("{}: client: {}, wrote: {}".format(current_thread.name, self.client_address,
-                                                     "Nuevo Cliente # "+ str(numeroDeClientes)))
+        numeroDeDatos += 1
+
+        if (opcion == 49): #1
             socket.sendto(host_name.encode(), self.client_address)
-
-        elif (opcion == 49): #1
-            socket.sendto(host_name.encode(), self.client_address)
-
-        elif (opcion== 50): #2
+        elif (opcion == 50): #2
             socket.sendto(ipAddress.encode(), self.client_address)
-
-        elif (opcion== 51): #3
-            socket.sendto(ipAddress.encode(), self.client_address)
-
-        elif (opcion== 52): #4
-            socket.sendto(ipAddress.encode(), self.client_address)
-
-        elif (opcion== 53): #5
-            socket.sendto(ipAddress.encode(), self.client_address)
-
-        elif (opcion== 54): #6
-            print(numeroDeClientes)
-            numeroDeClientes -= 1
-            mensaje= "Cliente desactivado"
-            socket.sendto(mensaje.encode(), self.client_address)
-
+        elif (opcion == 51): #3
+            datos= str(numeroDeDatos)
+            socket.sendto(datos.encode(), self.client_address)
         else:
+            socket.sendto(host_name.encode(), self.client_address)
             socket.sendto(data.upper(), self.client_address)
 
+        numeroDeDatos -= 1
 
 class ThreadedUDPServer(socketserver.ThreadingMixIn, socketserver.UDPServer):
     pass
