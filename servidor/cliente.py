@@ -26,7 +26,7 @@ def menu():
             if (opcion == '1'):
                 webbrowser.open('https://timezonedb.com/country-codes')
 
-            data = input("Escribir Codigo: ")
+            codigo = input("Escribir Codigo: ")
 
 
         sock.sendto(data.encode(), (HOST, PORT))
