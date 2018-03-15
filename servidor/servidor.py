@@ -4,7 +4,7 @@ import urllib.request
 import json
 import datetime
 
-HOST, PORT = "172.24.93.7", 9090
+HOST, PORT = "172.24.93.7", 8090
 host_name = "Host name: %s" % socket.gethostname()
 ipAddress= "IP address: %s" % socket.getaddrinfo(HOST,PORT)
 numeroDeDatos = 0
@@ -52,15 +52,23 @@ class ThreadedUDPRequestHandler(socketserver.BaseRequestHandler):
             cont = 0
             while cont < len(listaHost):
                 if listaHost[cont]["ip"] == self.client_address[0]:
+
                     listaHost.remove(listaHost[cont])
                     break
                 cont += 1
             socket.sendto("Has salido al chat!".encode(), self.client_address)
             print(listaHost)
         elif (number == "9"):
+            print("------------------------")
             cont = 0
             while cont < len(listaHost):
+                print("----+++++++++++++++------")
+                print(listaHost[cont]["ip"])
                 if listaHost[cont]["ip"] != self.client_address[0]:
+                    print("----++++/////////////+++++------")
+                    print(listaHost[cont]["id"])
+                    print(code)
+                    print(code.encode())
                     socket.sendto(code.encode(), listaHost[cont]["id"])
                 cont += 1
             socket.sendto("enviado".encode(), self.client_address)

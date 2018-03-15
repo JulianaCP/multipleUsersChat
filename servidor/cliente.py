@@ -2,10 +2,12 @@ import socket
 import sys
 import webbrowser
 
-def enviar(data, code):
-    HOST, PORT = "172.24.93.7", 9090
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+HOST, PORT = "172.24.93.7", 8090
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
+
+def enviar(data, code):
+    global sock, HOST, PORT
     data = data + "," + code
     sock.sendto(data.encode(), (HOST, PORT))
     received = sock.recv(1024)
@@ -31,7 +33,9 @@ def subMenu(data):
     subMenu(data)
 
 def menu():
+    global sock, HOST, PORT
     code = ""
+    sock.connect((HOST, PORT))
     while(True):
         print("*************        MENU PRINCIPAL      *******************")
         data = input("1. Consultar el nombre del host del Servidor\n"
